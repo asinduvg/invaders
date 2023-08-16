@@ -12,6 +12,7 @@ build:
     - apt-get update && apt-get install -y build-essential
     - apt-get install -y curl
     - apt-get install libasound2-dev -y
+    - apt install pkg-config
     - curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     - source $HOME/.cargo/env
     - cargo --version
