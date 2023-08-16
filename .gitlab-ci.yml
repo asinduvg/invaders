@@ -1,0 +1,32 @@
+# .gitlab-ci.yml
+
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  image: rust:latest
+  script:
+    - cargo build --release
+
+test:
+  stage: test
+  image: rust:latest
+  script:
+    - cargo test
+
+package:
+  stage: deploy
+  image: rust:latest
+  before_script:
+    - cargo build --release
+  script:
+    - mkdir -p artifacts
+    - cp target/release/your_game_executable artifacts/
+  artifacts:
+    paths:
+      - artifacts/
+
+# Additional deploy stages can be added here, depending on your deployment strategy.
