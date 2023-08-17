@@ -1,0 +1,38 @@
+# .gitlab-ci.yml
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  image: ubuntu:latest  # Use an Ubuntu image for building
+
+  script:
+    - apt-get update && apt-get install -y build-essential
+    - apt-get install -y curl
+    - apt-get install libasound2-dev -y
+    - apt install pkg-config -y
+    - curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    - source $HOME/.cargo/env
+    - cargo --version
+    - rustc --version
+    - cargo build --release
+    - cargo build --release
+
+test:
+  stage: test
+  image: ubuntu:latest  # Use an Ubuntu image for testing
+
+  script:
+    - apt-get update && apt-get install -y build-essential
+    - apt-get install -y curl
+    - apt-get install libasound2-dev -y
+    - apt install pkg-config -y
+    - curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    - source $HOME/.cargo/env
+    - cargo --version
+    - rustc --version
+    - cargo build --release
+    - cargo build --release
+    - cargo test
